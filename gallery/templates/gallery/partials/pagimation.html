@@ -1,0 +1,16 @@
+<div class="d-flex justify-content-around">
+    <div class="">
+      <a
+        class="page-link"
+        href="{% url 'Image' image_id=imageDetails.id %}?offset={{ lastOffset }}&type=prev"
+        ><h1 aria-hidden="true" class="dialog-1">&laquo;</h1>
+      </a>
+    </div>
+    <div class="">
+      <a
+        class="page-link"
+        href="{% url 'Image' image_id=imageDetails.id %}?offset={{ lastOffset }}&type=next"
+        ><h1 aria-hidden="true">&raquo;</h1></a
+      >
+    </div>
+  </div>

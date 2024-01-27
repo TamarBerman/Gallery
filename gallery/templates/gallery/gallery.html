@@ -1,0 +1,33 @@
+{% extends 'gallery/layout.html' %} {% block title %}Gallery{% endblock %}
+{%block content %}
+<div style="margin-top: 5rem!important;">
+<div class="d-flex justify-content-center">
+  {% for category in categories %}
+  <button
+    class="btn btn-light mx-2 {% if category.title == selected_category %} active{% endif %}"
+  >
+    <a
+      class="text-decoration-none text-dark"
+      href="{% url 'Gallery' %}?category={{ category.title }}"
+      >{{category.title}}</a
+    >
+  </button>
+  {% endfor %}
+</div>
+<div class="card-list">
+  {% if images %} {% for image in images %}
+  <a href="{% url 'Image' image_id=image.id %}" class="card">
+    <div
+      class="img-wrapper"
+      style="height: 75%; background-image: url('{{ image.image.url }}'); background-size: cover; background-position: center;"
+    ></div>
+    <div class="card-body">
+      <p class="card-text">{{ image.title }}</p>
+    </div>
+  </a>
+  {% endfor %} {% else%}
+  <p>No images available for this category.</p>
+  {% endif %}
+</div>
+</div>
+{% endblock %}

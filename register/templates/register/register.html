@@ -1,0 +1,15 @@
+{% extends "gallery/layout.html" %} {% block title %}Create an Account
+{% endblock %} {% load static %} {% block imports %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'register/css/registrationforms.css' %}"
+/>
+{% endblock %} {% load crispy_forms_tags %} {% block content %}
+<div id="registerForm">
+  <form method="POST" class="form-group">
+    {% csrf_token %} {{ form|crispy }}
+    <button type="submit" class="btn btn-success">Register</button>
+  </form>
+</div>
+{% endblock %}

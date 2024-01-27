@@ -1,0 +1,16 @@
+/* Gallery list */
+.card-list {
+    display: flex;
+    flex-wrap: wrap;/* Ensures that cardswrap to the next line */
+    overflow-x: auto; /* Enable horizontal scrolling if cards don't fit */
+    margin-bottom: 20px;
+    margin: auto;
+    justify-content: flex-start;
+  }
+  
+  .card {
+    margin: 11.5px; 
+    width: 17rem;
+    height: 300px;
+  }
+  

@@ -1,0 +1,110 @@
+{% extends 'gallery/layout.html'%} {% load static %} {% block title %}
+Image{%endblock %} {% block content %} {% block imports %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'gallery/css/reviews.css' %}"
+/>
+
+{% endblock %}
+
+<div class="album py-5 m-5">
+  <div class="row">
+    <div class="col">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="position-relative">
+              <div class="img-hover-zoom">
+                <img
+                  class="img-fluid"
+                  src="{{ imageDetails.tallImage.url }}"
+                  alt="Tall Image"
+                />
+              </div>
+              <a
+                href="{{ imageDetails.tallImage.url }}"
+                download="tall_image.jpg"
+                class="position-absolute top-0 end-0 m-3 p-2"
+              >
+                <button class="btn btn-light mx-2 bg-white bg-opacity-25">
+                  <h3><i class="bi bi-download text-dark"></i></h3>
+                </button>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="position-relative">
+                  <div class="img-hover-zoom">
+                    <img
+                      class="img-fluid"
+                      src="{{ imageDetails.landImage.url }}"
+                      alt="Square Image"
+                    />
+                  </div>
+                  <a
+                    href="{{ imageDetails.landImage.url }}"
+                    download="land_image.jpg"
+                    class="position-absolute top-0 end-0 m-3 p-2"
+                  >
+                    <button class="btn btn-light mx-2 bg-white bg-opacity-25">
+                      <h3><i class="bi bi-download text-dark"></i></h3>
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="position-relative">
+                  <div class="img-hover-zoom">
+                    <img
+                      class="img-fluid"
+                      src="{{ imageDetails.squareImage.url }}"
+                      alt="Square Image"
+                    />
+                  </div>
+
+                  <a
+                    href="{{ imageDetails.squareImage.url }}"
+                    download="square_image.jpg"
+                    class="position-absolute top-0 end-0 m-3 p-2"
+                  >
+                    {% comment %} bg-light bg-opacity-25 rounded border
+                    border-secondary {% endcomment %}
+                    <button
+                      class="btn btn-light mx-2 bg-white bg-opacity-25"
+                    >
+                      <h3><i class="bi bi-download text-dark"></i></h3>
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <button id="downloadAllButton">Download All</button>
+    </div>
+
+    <div class="col col-lg-3">
+      <div>
+        <h3>{{imageDetails.title}}</h3>
+        <!-- category Tas-->
+        {% for category in imageDetails.categories.all %}
+        <span class="badge bg-info text-dark">{{category}}</span>
+        {% endfor %}
+
+        <p>{{imageDetails.description}}</p>
+      </div>
+      {% include 'gallery/reviews.html' %}
+    </div>
+    <!-- Include the necessary JavaScript -->
+    <script src="{% static 'gallery/js/image.js' %}"></script>
+  </div>
+  {% endblock %}
+</div>

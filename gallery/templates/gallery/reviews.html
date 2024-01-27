@@ -1,0 +1,130 @@
+<div>
+  <div class="reviewtitle">
+    <h5 style="margin-right: 10px">Reviews</h5>
+    <!-- Button trigger modal - Add review  -->
+    <a
+      href="#"
+      type="button"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      >Add review</a
+    >
+  </div>
+
+  <!-- Modal adding review Form-->
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div id="addReviewForm" style="display: block">
+            <form
+              id="reviewForm"
+              action="{% url 'addreview' imageDetails.id %}"
+              method="post"
+            >
+              {% csrf_token %}
+              <label for="customRange3" class="form-label">Rate</label>
+              <div class="d-flex justify-content-between">
+                <p class="pe-2">0</p>
+                <input
+                  type="range"
+                  class="form-range"
+                  min="0"
+                  max="5"
+                  step="1"
+                  id="customRange3"
+                  name="rate"
+                />
+                <p class="ps-2">5</p>
+              </div>
+
+              <textarea
+                id="reviewText"
+                name="review_text"
+                placeholder="Enter your review"
+                class="form-control"
+                rows="3"
+              ></textarea>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  name="anonymous"
+                  type="checkbox"
+                  value="clicked"
+                  id="flexCheckDefault"
+                />
+                <label class="form-check-label" for="flexCheckDefault">
+                  Stay Anonymous
+                </label>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            type="submit"
+            value="Submit Review"
+            class="btn btn-primary"
+            onclick="submitReviewForm()"
+          >
+            Save changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Display Reviews - loop-->
+  {% if reviews %}
+  <div class="list-group" id="reviewsList">
+    {% include 'gallery/partials/pagimation.html' %} {% for review in reviews%}
+    <div class="list-group-item list-group-item-action m-2" aria-current="true">
+      <div class="d-flex w-100 justify-content-between">
+        <div>
+          {% for i in review.star_rating|make_list %}
+          <i class="bi bi-star-fill"></i> {% endfor %}
+        </div>
+
+        <small>{{review.created_at}}</small>
+      </div>
+      <p class="mb-1">{{review.text}}</p>
+      <i class="bi bi-person-circle text-secondary"></i>
+      {% if review.anonymous == False %}
+      <a href="mailto:{{review.user.email}}">{{ review.user.username }}</a>
+      {% else%}
+      <small>◉_◉ anonymous ◉_◉</small>
+      {% endif%}
+    </div>
+    <div id="openModal"></div>
+
+    {% endfor %} {% include 'gallery/partials/pagimation.html' %}
+
+    <p class="text-center">- {{lastOffset}} -</p>
+
+    {% else %}
+    <p>No reviews for this image.</p>
+    {% endif %}
+  </div>
+</div>
