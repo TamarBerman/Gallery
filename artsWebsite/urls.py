@@ -16,13 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
-# ***
 from django.conf import settings
 from django.conf.urls.static import static
-from register import views as v
-
-
 
 
 urlpatterns = [
@@ -30,21 +25,9 @@ urlpatterns = [
     path('', include('gallery.urls')),   
     path('', include("django.contrib.auth.urls")),   
     path('', include('register.urls')),
-    
-    # //
-    path("", include("chat_app.urls")),
-
-       
-    # path("register/", v.register, name="register"),
-    # path("profile/", v.profile, name="profile"),
-    # path("logoutPage/", v.logoutPage, name="logout"),
-    
-    
-
-
-
+    path('', include("chat_app.urls")),
 ]
 
-# ***
+# set media Url
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

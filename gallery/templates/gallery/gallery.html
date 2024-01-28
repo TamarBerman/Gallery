@@ -1,6 +1,10 @@
-{% extends 'gallery/layout.html' %} {% block title %}Gallery{% endblock %}
+{% extends 'gallery/layout.html' %} 
+
+{% block title %}Gallery{% endblock %}
+
 {%block content %}
 <div style="margin-top: 5rem!important;">
+  <!-- display categories -->
 <div class="d-flex justify-content-center">
   {% for category in categories %}
   <button
@@ -14,8 +18,11 @@
   </button>
   {% endfor %}
 </div>
+
+  <!-- display images -->
 <div class="card-list">
   {% if images %} {% for image in images %}
+  <!-- navigate to url called Image (urls.py) with param-->
   <a href="{% url 'Image' image_id=image.id %}" class="card">
     <div
       class="img-wrapper"
@@ -26,7 +33,7 @@
     </div>
   </a>
   {% endfor %} {% else%}
-  <p>No images available for this category.</p>
+  <p class="p-3">No images available for this category :(</p>
   {% endif %}
 </div>
 </div>

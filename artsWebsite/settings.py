@@ -133,12 +133,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# ****************************************************************
-
-# art_gallery_project/settings.py
-
 # Static files (CSS, JavaScript, images)
-STATICFILES_DIRS = [BASE_DIR / "static",
+STATICFILES_DIRS = [
                     BASE_DIR / "gallery/static",
                     BASE_DIR / "register/static",
                     BASE_DIR / "chat_app/static",]

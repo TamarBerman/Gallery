@@ -10,7 +10,6 @@
       >Add review</a
     >
   </div>
-
   <!-- Modal adding review Form-->
   <div
     class="modal fade"
@@ -81,7 +80,7 @@
             class="btn btn-secondary"
             data-bs-dismiss="modal"
           >
-            Close
+            Cancel
           </button>
           <button
             type="submit"
@@ -89,7 +88,7 @@
             class="btn btn-primary"
             onclick="submitReviewForm()"
           >
-            Save changes
+            Add Review
           </button>
         </div>
       </div>
@@ -99,32 +98,36 @@
   <!-- Display Reviews - loop-->
   {% if reviews %}
   <div class="list-group" id="reviewsList">
-    {% include 'gallery/partials/pagimation.html' %} {% for review in reviews%}
+    <!-- Avoid repeating code-->
+    {% include 'gallery/partials/pagimation.html' %} 
+    {% for review in reviews%}
     <div class="list-group-item list-group-item-action m-2" aria-current="true">
       <div class="d-flex w-100 justify-content-between">
         <div>
+          <!-- filter  converts a value into a list of that length and iterats over it-->
           {% for i in review.star_rating|make_list %}
           <i class="bi bi-star-fill"></i> {% endfor %}
         </div>
-
+        
         <small>{{review.created_at}}</small>
       </div>
       <p class="mb-1">{{review.text}}</p>
       <i class="bi bi-person-circle text-secondary"></i>
+
       {% if review.anonymous == False %}
       <a href="mailto:{{review.user.email}}">{{ review.user.username }}</a>
       {% else%}
       <small>◉_◉ anonymous ◉_◉</small>
       {% endif%}
     </div>
-    <div id="openModal"></div>
+    {% endfor %} 
 
-    {% endfor %} {% include 'gallery/partials/pagimation.html' %}
+    {% include 'gallery/partials/pagimation.html' %}
 
     <p class="text-center">- {{lastOffset}} -</p>
 
     {% else %}
-    <p>No reviews for this image.</p>
+    <p class="text-center p-2">No reviews for this image.</p>
     {% endif %}
   </div>
 </div>

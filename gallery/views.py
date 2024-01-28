@@ -1,8 +1,4 @@
-from wsgiref.types import FileWrapper
-from zipfile import ZipFile
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
-from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from .models import Image, Review, Category
 
@@ -10,8 +6,10 @@ from .models import Image, Review, Category
 def home(response):
     return render(response, 'gallery/home.html')
 
+
 '''Galley page displays sorts categories and filterd gallery'''
 def gallery(request):
+    # Retrieves the selected category from the query parameters.
     selected_category=request.GET.get('category')
     
     # do not filter 'all' / None
@@ -29,11 +27,14 @@ def gallery(request):
     context= {"images":images,"categories": categories, "selected_category":selected_category} 
     return render(request, 'gallery/gallery.html', context)
 
+
 '''Image page display images and sorted reviews according to the selected reviews page'''
 def image(request, image_id):
     # define num of reviews for each review's page
     limit=5
+    # data from param
     image_details = get_object_or_404(Image, pk=image_id)
+    # data from query string * calculate page and limit to get offset
     offset = (int(request.GET.get('offset', 0))-1)*limit
     type = request.GET.get('type')
     
@@ -45,38 +46,40 @@ def image(request, image_id):
         offset = min(offset + limit, total_reviews_count)
     else:
         offset=0
+        
+    #  handle the case where it goes beyond the total number of reviews.
     if offset == total_reviews_count:
         offset -= total_reviews_count%5
+        
     reviews = image_details.reviews.all().order_by('-created_at')[offset:offset+limit]  # Get all reviews for the image
     
+    # Create a string of stars based on the rate and Add a new attribute to the review object
     for review in reviews:
-        # Assuming 'rate' is the field in the Review model that stores the rating
         rate = review.rate
-        # Create a string of stars based on the rate
         stars = '*' * rate
-        review.star_rating = stars  # Add a new attribute to the review object
-
+        review.star_rating = stars  
+    
     context= {'imageDetails': image_details, 'reviews': reviews, "lastOffset":(int(offset/5)+1)}
     return render(request, 'gallery/image.html', context=context)
 
 
 @login_required
 def addreview(request, image_id):
+    
+    # Retrieves details from the request (form).
     if request.method == 'POST':
-        # Assuming you have an Image model and a form for creating reviews
         image = Image.objects.get(pk=image_id)
-        text = request.POST.get('review_text')  # Adjust this based on your form field name
+        text = request.POST.get('review_text')
         rate=int(request.POST.get('rate'))
-        user = request.user  # The currently authenticated user
-        # Create and save the review with the current user
+        user = request.user  
+        
         if request.POST.get('anonymous')=="clicked":
             anonymous=True
         else:
             anonymous=False
-
+            
         review = Review(image=image, text=text, user=user, anonymous=anonymous, rate=rate)
-        review.save()
+        review.save()   
         
-        return redirect('Image', image_id=image_id)
-    else:
-        return redirect('Image', image_id=image_id)
+    return redirect('Image', image_id=image_id)
+

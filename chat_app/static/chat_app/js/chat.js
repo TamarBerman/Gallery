@@ -1,54 +1,4 @@
-{% extends 'gallery/layout.html' %} 
-{% block title %} Real-time Chat {%endblock%} 
-{% load static %} 
-
-{% block imports %}
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="{% static 'chat_app/css/chat.css' %}"
-/>
-<link
-  href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
-  rel="stylesheet"
-/>
-{% endblock %}
-
-{% block content %}
-
-<div class="row">
-  <div class="col">
-    <h1 class="fs-1 fw-bold" style="text-align: center; margin-top: 30%">
-      Hey {{recipient_username}},
-    </h1>
-    <h1 class="fs-1 fw-bold" style="text-align: center">let's Chat Together</h1>
-  </div>
-  <div class="col">
-    <div class="h-screen py-10 px-4 sm:px-6 lg:px-8">
-      <div
-        class="chat-container bg-white max-w-xl mx-auto rounded-lg shadow-md overflow-hidden"
-      >
-        <div class="chat-header bg-blue-600 text-white p-4">
-          {{recipient_username}}
-        </div>
-
-        <div class="chat-messages h-96 overflow-y-auto p-4" id="chat-box"></div>
-
-        <div class="border-t border-gray-200 p-4">
-          <input
-            type="text"
-            class="chat-input w-full px-4 py-2 rounded-md border focus:ring-indigo-500 focus:border-indigo-500"
-            id="chat-input"
-            placeholder="Type your message..."
-          />
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
 
     const chatSocket = new WebSocket(
       "ws://" + window.location.host + "/ws/chat/{{ recipient_username }}/"
@@ -177,5 +127,3 @@
   });
   });
     // ... (remaining code)
-</script>
-{% endblock %}

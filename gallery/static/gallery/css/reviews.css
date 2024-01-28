@@ -1,10 +1,3 @@
-.trophy-content {
-  width: 40px; /* Set your desired width */
-  height: 40px; /* Set your desired height */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 /* pagination */
 .page-link {
@@ -17,32 +10,11 @@
   color: grey; /* Color on mouseover */
 }
 
-/* stars - rate */
-.stars {
-  display: inline-block;
-  font-size: 20px;
-}
-
-.stars::before {
-  content: '★★★★★';
-  letter-spacing: 3px;
-  background: linear-gradient(90deg, gold 0%, gold 100%);
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-.stars span {
-  display: inline-block;
-  position: relative;
-}
-
-.stars span::before {
-  content: '★★★★★';
-  letter-spacing: 3px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: linear-gradient(90deg, gold 0%, gold 100%);
-  -webkit-background-clip: text;
-  color: transparent;
+/* Chat! :) */
+.trophy-content {
+  width: 40px; 
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
