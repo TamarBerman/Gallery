@@ -154,10 +154,11 @@ LOGOUT_URL = 'logout'
 LOGIN_URL='login'
 
 
-# ///
+# chat - 
 ASGI_APPLICATION = 'artsWebsite.asgi.application'
 CHANNEL_LAYERS = {
 	"default": {
+    #  a simple in-memory layer
 		"BACKEND": "channels.layers.InMemoryChannelLayer"
 	}
 }

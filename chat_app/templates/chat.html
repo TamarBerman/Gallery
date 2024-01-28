@@ -1,7 +1,6 @@
 {% extends 'gallery/layout.html' %} 
-{% block title %} Real-time Chat {%endblock%} 
+{% block title %} Real-time Chat{%endblock%}
 {% load static %} 
-
 {% block imports %}
 <link
   rel="stylesheet"
@@ -12,7 +11,7 @@
   href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
   rel="stylesheet"
 />
-{% endblock %}
+{% endblock %} 
 
 {% block content %}
 
@@ -48,12 +47,13 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-
+  document.addEventListener("DOMContentLoaded", function () {
+    // creating a websocket instance for bi-direction connection communication / long-live connection as chatSocket constant
+    // ws:// is a websocket protocol prefix to create a connection over an unencrypted connection.
     const chatSocket = new WebSocket(
       "ws://" + window.location.host + "/ws/chat/{{ recipient_username }}/"
     );
-
+    //  function gets executed whenever a new message (broadcasted message) is received, and the message data becomes available to e.data property.
     chatSocket.onmessage = function (e) {
       const data = JSON.parse(e.data);
       const message = data["message"];
@@ -95,87 +95,20 @@
       chatBox.scrollTop = chatBox.scrollHeight;
     };
 
-    document.querySelector("#chat-input").addEventListener("keyup", function (e) {
-      if (e.key === "Enter") {
-        const messageInput = document.querySelector("#chat-input");
-        const message = messageInput.value;
-        chatSocket.send(
-          JSON.stringify({
-            message: message,
-          })
-        );
-        messageInput.value = "";
-      }
-    });
-
-  // ... (previous code)
-
-  // users details
-  document.addEventListener("click", function (event) {
-    if (event.target.classList.contains("sender-name")) {
-        event.preventDefault();
-        const senderUsername = event.target.textContent.trim();
-        alert("senderUsername: " + senderUsername);
-        // Call the view to get user details
-        fetch(`/user_detail/${senderUsername}/`)
-            .then((response) => {
-                if (!response.ok) {
-                    if (response.status === 404) {
-                        throw new Error("User not found");
-                    } else {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                }
-                return response.json();
+    document
+      .querySelector("#chat-input")
+      .addEventListener("keyup", function (e) {
+        if (e.key === "Enter") {
+          const messageInput = document.querySelector("#chat-input");
+          const message = messageInput.value;
+          chatSocket.send(
+            JSON.stringify({
+              message: message,
             })
-            .then((userDetails) => {
-                console.log("Received user details:", userDetails);
-
-                // Dynamically include the user detail template
-                const userDetailContainer = document.getElementById(
-                    "user-detail-container"
-                );
-                userDetailContainer.innerHTML = `
-                        <h2>User Details</h2>
-                        <p><strong>Username:</strong> ${userDetails.username}</p>
-                        <p><strong>Email:</strong> ${userDetails.email}</p>
-                        <!-- Add other user details as needed -->
-                    `;
-
-                // Update the content of the static modal
-                const modalBody = document.getElementById("modal-body");
-                modalBody.innerHTML = `
-                        <div class="bg-info p-3 rounded">
-                            <div id="trophy" class="text-center d-inline-block fs-1 lh-1 p-4 rounded-circle bg-white">
-                                <div class="trophy-content">
-                                    <h1 class="text-center">${userDetails.username
-                                        .charAt(0)
-                                        .toUpperCase()}</h1>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-5 px-5">
-                            <h3>${userDetails.username}</h3>
-                            <p class="my-2 pb-3">email: <strong>${
-                                userDetails.email
-                            }</strong></p>
-                        </div>
-                    `;
-
-                // Show the Bootstrap modal
-                const firstModal = new bootstrap.Modal(
-                    document.getElementById("firstModal")
-                );
-                firstModal.show();
-                // Optionally, show a modal or toggle visibility of the user details
-                // based on your UI/UX requirements
-            })
-            .catch((error) => {
-                console.error("Error fetching user details:", error);
-            });
-    }
+          );
+          messageInput.value = "";
+        }
+      });
   });
-  });
-    // ... (remaining code)
 </script>
 {% endblock %}
