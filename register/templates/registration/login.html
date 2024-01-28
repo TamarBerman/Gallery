@@ -6,9 +6,12 @@
   href="{% static 'register/css/registrationforms.css' %}"
 />
 {% endblock %} {% load crispy_forms_tags %} {% block content %}
-<div id="registerForm">
+<div id="registerForm"> 
 <form method="post" class="from-group">
-  {% csrf_token %} {{form|crispy}}
+  <!-- Cross-Site Request Forgery -->
+  {% csrf_token %}
+  <!--  filter applies the crispy-forms styling to the form. -->
+  {{form|crispy}}
   <p>Don't have an accoount? Create one <a href="/register">here</a></p>
   <button type="submit" class="btn btn-success">Login</button>
 </form>
