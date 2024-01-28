@@ -22,7 +22,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('gallery.urls')),   
+    path('', include('gallery.urls')),  
+    # built-in login & logout 
     path('', include("django.contrib.auth.urls")),   
     path('', include('register.urls')),
     path('', include("chat_app.urls")),
