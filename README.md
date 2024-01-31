@@ -5,7 +5,7 @@ Huge Gallery of photos, with the option to filter by category. Each image can be
 Real-time communication between our members - Chat using the WebSocket concept.
 Registration, connection and disconnection, full validation and authentication.
 
-## Language: 
+## Languages: 
 
 * Django - Python 
 * JINJA - HTML templates 
