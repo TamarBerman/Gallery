@@ -7,10 +7,11 @@ Registration, connection and disconnection, full validation and authentication.
 
 ## Language: 
 
-* Django - Python | 
-* JINJA - HTML templates | 
-* CSS, Bootstrap | 
-* Web Socket - Real-Time Transport Protocol (RTP), Channel Strategy | 
+* Django - Python 
+* JINJA - HTML templates 
+* CSS, Bootstrap 
+* JavaScript
+* Web Socket - Real-Time Transport Protocol (RTP), Channel Strategy 
 
 
 ## Setup & Installation
