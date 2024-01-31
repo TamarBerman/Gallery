@@ -42,7 +42,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 'sender': self.sender
             }
         )
-
     
     # handle the message received by the group and extract the message and sender details from the event
     async def chat_message(self, event):

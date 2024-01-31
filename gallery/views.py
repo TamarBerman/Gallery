@@ -65,7 +65,6 @@ def image(request, image_id):
 
 @login_required
 def addreview(request, image_id):
-    
     # Retrieves details from the request (form).
     if request.method == 'POST':
         image = Image.objects.get(pk=image_id)
