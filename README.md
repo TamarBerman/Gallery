@@ -52,14 +52,13 @@ Administrator has access to all-users-history page - in addition to his own hist
 ## Setup & Installation
 <sub> Make sure you have the latest version of Python installed. </sub>
 
-> 
-**install python here:** https://www.python.org/downloads/
-python --version
-Python 3.12.1
+> **install python here:** https://www.python.org/downloads/
+    python --version
+    Python 3.12.1
 
-**install django:** pip install django / py -m pip install django
-python -m django --version
-5.0.1
+    **install django:** pip install django / py -m pip install django
+    python -m django --version
+    5.0.1
 
 
 ```
@@ -77,7 +76,7 @@ py manage.py runserver
 ```
 
 ## Viewing The App
-Go to http://127.0.0.1:5000
+Go to http://127.0.0.1:8000
 
 
 <h3 align="center">* * *</h3>
