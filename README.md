@@ -34,6 +34,9 @@ pip install -r requirements.txt
 ```
 ## Running The App
 ```
+python manage.py createsuperuser
+```
+```
 py manage.py migrate
 ```
 ```
