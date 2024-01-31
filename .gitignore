@@ -16,4 +16,4 @@ db.sqlite3
 *.env
 
 # Ignore media files (uploaded by users, for example)
-# media/
+media/
