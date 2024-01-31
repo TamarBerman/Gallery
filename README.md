@@ -52,13 +52,13 @@ Administrator has access to all-users-history page - in addition to his own hist
 ## Setup & Installation
 <sub> Make sure you have the latest version of Python installed. </sub>
 
-> **install python here:** https://www.python.org/downloads/
-    python --version
-    Python 3.12.1
+> python --version : Python 3.12.1
+> python -m django --version : 5.0.1
 
-    **install django:** pip install django / py -m pip install django
-    python -m django --version
-    5.0.1
+<span>install python: https://www.python.org/downloads/</span>
+
+<span>install django: pip install django / py -m pip install django</span>
+
 
 
 ```
